@@ -32,4 +32,34 @@ const register_client = async (req, res) => {
   });
 };
 
-module.exports = { register_client };
+const edit_client = async (req, res) => {
+  const { id } = req.params;
+  const { firstname, lastname, email, mobile, userType } = req.body;
+
+  const updateClient = await ClientModel.findByIdAndUpdate(
+    { _id: id },
+    {
+      firstname,
+      lastname,
+      email,
+      mobile,
+      userType,
+    }
+  );
+
+  if (!updateClient) return res.status(400).json({ message: "edit failed" });
+
+  return res.status(200).json({ message: "Saved Successfully" });
+};
+
+const delete_client = async (req, res) => {
+  const { id } = req.params;
+
+  const deleteClient = await ClientModel.deleteOne({ _id: id });
+
+  if (!deleteClient) return res.status(400).json({ message: "Delete Failed" });
+
+  return res.status(200).json({ message: "Client Delete Successfully" });
+};
+
+module.exports = { register_client, edit_client, delete_client };
