@@ -13,5 +13,8 @@ router.delete("/deleteclient/:id", ClientController.delete_client);
 
 //Books Routes
 router.post("/addbook", BookController.add_book);
+router.put("/editbook/:id", BookController.edit_book);
+router.delete("/deletebook/:id", BookController.delete_book);
+router.get("/listbooks", BookController.list_books);
 
 module.exports = router;
