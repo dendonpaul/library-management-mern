@@ -22,5 +22,6 @@ router.get("/listbooks", BookController.list_books);
 //Issue Routes
 router.post("/issuebook/:user/:book", IssueController.issue_book);
 router.get("/issuedlist", IssueController.show_issued_books);
+router.post("/returnbook/:id", IssueController.return_book);
 
 module.exports = router;

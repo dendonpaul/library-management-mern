@@ -37,4 +37,29 @@ const show_issued_books = async (req, res) => {
   }
 };
 
-module.exports = { issue_book, show_issued_books };
+const return_book = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const returnBook = await IssueModel.findByIdAndUpdate(
+      { _id: id },
+      {
+        returned: true,
+      }
+    );
+
+    if (!returnBook) return res.send("error. return failed");
+
+    const returnBookId = returnBook.book;
+
+    const updateQty = await BooksModel.findByIdAndUpdate(returnBookId, {
+      $inc: { copies: 1 },
+    });
+
+    res.send(returnBook);
+  } catch (err) {
+    return res.send(err);
+  }
+};
+
+module.exports = { issue_book, show_issued_books, return_book };
