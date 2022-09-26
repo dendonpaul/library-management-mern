@@ -62,4 +62,15 @@ const delete_client = async (req, res) => {
   return res.status(200).json({ message: "Client Delete Successfully" });
 };
 
-module.exports = { register_client, edit_client, delete_client };
+const list_clients = async (req, res) => {
+  try {
+    const allClients = await ClientModel.find({});
+    if (!allClients) return res.send("Failed to fetch details of Clients");
+
+    return res.status(200).json(allClients);
+  } catch (err) {
+    return res.send(err);
+  }
+};
+
+module.exports = { register_client, edit_client, delete_client, list_clients };
