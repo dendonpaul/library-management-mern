@@ -12,6 +12,7 @@ router.post("/addclient", ClientController.register_client);
 router.put("/editclient/:id", ClientController.edit_client);
 router.delete("/deleteclient/:id", ClientController.delete_client);
 router.get("/listclients", ClientController.list_clients);
+router.get("/clientdetails/:id", ClientController.get_client_details);
 
 //Books Routes
 router.post("/addbook", BookController.add_book);

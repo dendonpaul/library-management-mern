@@ -73,4 +73,23 @@ const list_clients = async (req, res) => {
   }
 };
 
-module.exports = { register_client, edit_client, delete_client, list_clients };
+const get_client_details = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const getDetails = await ClientModel.find({ _id: id });
+    if (!getDetails) return res.send("errrrr");
+
+    return res.status(200).json(getDetails);
+  } catch (err) {
+    return res.send(err);
+  }
+};
+
+module.exports = {
+  register_client,
+  edit_client,
+  delete_client,
+  list_clients,
+  get_client_details,
+};

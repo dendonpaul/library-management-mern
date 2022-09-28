@@ -1,0 +1,8 @@
+.allclients th {
+  padding: 10px 40px;
+}
+
+.input_form {
+  display: flex;
+  flex-direction: column;
+}

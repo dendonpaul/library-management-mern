@@ -1,0 +1,9 @@
+.contents_container {
+  padding-top: 50px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.menu {
+  display: flex;
+}
