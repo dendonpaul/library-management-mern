@@ -19,6 +19,11 @@ const Header = () => {
               <button>Add Client</button>
             </Link>
           </li>
+          <li>
+            <Link to="/addbook">
+              <button>Add Book</button>
+            </Link>
+          </li>
         </ul>
       </div>
     </div>

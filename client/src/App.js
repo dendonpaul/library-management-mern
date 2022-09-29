@@ -3,9 +3,10 @@ import Login from "./components/login/Login";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/home/Home";
 import "./App.css";
-import AllClients from "./components/pages/AllClients";
-import AddClient from "./components/pages/AddClient";
-import EditClient from "./components/pages/EditClient";
+import AllClients from "./components/pages/clientpages/AllClients";
+import AddClient from "./components/pages/clientpages/AddClient";
+import EditClient from "./components/pages/clientpages/EditClient";
+import AddBook from "./components/pages/bookpages/AddBook";
 
 function App() {
   const user = localStorage.getItem("token");
@@ -15,6 +16,7 @@ function App() {
       {user && <Route path="/allclients" element={<AllClients />} />}
       {user && <Route path="/addclient" element={<AddClient />} />}
       {user && <Route path="/editclient/:id" element={<EditClient />} />}
+      {user && <Route path="/addbook" element={<AddBook />} />}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/" element={<Navigate to="/login" />} />

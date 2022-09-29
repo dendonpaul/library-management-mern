@@ -1,6 +1,6 @@
 import React from "react";
-import "./index.css";
-import Header from "../pagecomps/Header";
+import "../index.css";
+import Header from "../../pagecomps/Header";
 import { useState } from "react";
 import axios from "axios";
 

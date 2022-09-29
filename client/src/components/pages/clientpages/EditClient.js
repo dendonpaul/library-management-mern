@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import "./index.css";
-import Header from "../pagecomps/Header";
+import "../index.css";
+import Header from "../../pagecomps/Header";
 import { useState } from "react";
 import axios from "axios";
 import { useParams, Navigate } from "react-router-dom";
@@ -8,13 +8,16 @@ import { useParams, Navigate } from "react-router-dom";
 const EditClient = () => {
   const [values, setValues] = useState({});
   const [messages, setMessages] = useState();
+
   //Update the input field values and store them in state
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
+
   //Get the id parameter from URL
   const { id } = useParams();
+
   // save the updated single client data
   const handleSubmission = (e) => {
     e.preventDefault();
@@ -31,6 +34,7 @@ const EditClient = () => {
     };
     saveuser();
   };
+
   //Fetch the single client details when the edit page is loaded
   useEffect(() => {
     try {
@@ -43,6 +47,7 @@ const EditClient = () => {
       console.log(err);
     }
   }, []);
+
   //open delete confirmation popup
   const handleDelete = (e) => {
     e.preventDefault();
@@ -63,6 +68,7 @@ const EditClient = () => {
       }
     };
   };
+
   //Delete user after confirmation
   const deleteHandler = () => {
     try {

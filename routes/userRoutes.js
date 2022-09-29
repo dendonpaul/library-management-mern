@@ -19,6 +19,7 @@ router.post("/addbook", BookController.add_book);
 router.put("/editbook/:id", BookController.edit_book);
 router.delete("/deletebook/:id", BookController.delete_book);
 router.get("/listbooks", BookController.list_books);
+router.get("/getcategories", BookController.get_categories);
 
 //Issue Routes
 router.post("/issuebook/:user/:book", IssueController.issue_book);

@@ -6,9 +6,23 @@ const add_book = async (req, res) => {
 
   await saveBook.save((err) => {
     if (err) {
-      return res.send("All fields required");
+      const isbn = err ? err.keyValue.isbn : "";
+      const name = err ? err.keyValue.name : "";
+      if (isbn != "" || name != "") {
+        if (isbn && name) {
+          return res.json({ message: `${isbn} and ${name} already exists` });
+        } else if (isbn) {
+          return res.json({ message: `${isbn}  already exists` });
+        } else if (name) {
+          return res.json({ message: `${name}  already exists` });
+        }
+      }
+      // isbn && res.json({ message: `${isbn} already exists` });
+      // name && res.json({ message: `${name} already exists` });
+
+      return res.send(err);
     }
-    return res.send("success");
+    return res.json({ message: "success" });
   });
 };
 
@@ -52,4 +66,19 @@ const list_books = async (req, res) => {
   }
 };
 
-module.exports = { add_book, edit_book, delete_book, list_books };
+const get_categories = async (req, res) => {
+  try {
+    const categories = await BooksModel.schema.path("cat").enumValues;
+    res.send(categories);
+  } catch (err) {
+    return res.send(err);
+  }
+};
+
+module.exports = {
+  add_book,
+  edit_book,
+  delete_book,
+  list_books,
+  get_categories,
+};

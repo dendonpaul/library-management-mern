@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Contents from "../pagecomps/Contents";
-import Header from "../pagecomps/Header";
+import Header from "../../pagecomps/Header";
 import axios from "axios";
-import "./index.css";
+import "../index.css";
 import { Link } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 
@@ -51,7 +50,7 @@ const AllClients = () => {
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>{clientList}</tbody>
+          <tbody>{data != "" ? clientList : "no clients"}</tbody>
         </table>
       </div>
     </>
