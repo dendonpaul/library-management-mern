@@ -3,7 +3,7 @@ import "./index.css";
 import Header from "../pagecomps/Header";
 import { useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 
 const EditClient = () => {
   const [values, setValues] = useState({});
@@ -56,6 +56,41 @@ const EditClient = () => {
       console.log(err);
     }
   }, []);
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    // Get the modal
+    let modal = document.getElementById("myModal");
+    // Get the <span> element that closes the modal
+    let span = document.getElementsByClassName("close")[0];
+    // When the user clicks the button, open the modal
+
+    modal.style.display = "block";
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+      modal.style.display = "none";
+    };
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    };
+  };
+
+  const deleteHandler = () => {
+    try {
+      axios
+        .delete(`http://localhost:3001/api/users/deleteclient/${id}`)
+        .then((res) => {
+          setMessages(res.data[0]);
+          window.location = "/allclients";
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -117,8 +152,21 @@ const EditClient = () => {
           </select>
 
           <button type="submit">Save Client</button>
+          <button type="button" onClick={handleDelete}>
+            Delete User
+          </button>
           <span id="message_s">{messages}</span>
         </form>
+      </div>
+      //delete model
+      <div id="myModal" className="modal">
+        <div className="modal-content">
+          <span className="close">&times;</span>
+          <p>Are you sure to delete the user</p>
+          <button type="button" onClick={deleteHandler}>
+            Delete
+          </button>
+        </div>
       </div>
     </>
   );

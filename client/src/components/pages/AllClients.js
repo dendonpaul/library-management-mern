@@ -32,9 +32,6 @@ const AllClients = () => {
           <Link to={`/editclient/${element._id}`}>
             <button>Edit</button>
           </Link>
-          <Link to={`/deleteclient/${element._id}`}>
-            <button>Delete</button>
-          </Link>
         </td>
       </tr>
     );
