@@ -7,18 +7,17 @@ import { useParams, Navigate } from "react-router-dom";
 
 const EditClient = () => {
   const [values, setValues] = useState({});
-
   const [messages, setMessages] = useState();
-
+  //Update the input field values and store them in state
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
+  //Get the id parameter from URL
   const { id } = useParams();
-
+  // save the updated single client data
   const handleSubmission = (e) => {
     e.preventDefault();
-
     const saveuser = () => {
       try {
         axios
@@ -30,21 +29,9 @@ const EditClient = () => {
         return console.log(err.response.data);
       }
     };
-
     saveuser();
   };
-
-  //prefill the input field with the user data
-
-  //   const userdetails = () => {
-  //     try {
-  //       axios
-  //         .get(`http://localhost:3001/api/users/clientdetails/${id}`)
-  //         .then((res) => {});
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
+  //Fetch the single client details when the edit page is loaded
   useEffect(() => {
     try {
       axios
@@ -56,7 +43,7 @@ const EditClient = () => {
       console.log(err);
     }
   }, []);
-
+  //open delete confirmation popup
   const handleDelete = (e) => {
     e.preventDefault();
     // Get the modal
@@ -64,9 +51,7 @@ const EditClient = () => {
     // Get the <span> element that closes the modal
     let span = document.getElementsByClassName("close")[0];
     // When the user clicks the button, open the modal
-
     modal.style.display = "block";
-
     // When the user clicks on <span> (x), close the modal
     span.onclick = function () {
       modal.style.display = "none";
@@ -78,7 +63,7 @@ const EditClient = () => {
       }
     };
   };
-
+  //Delete user after confirmation
   const deleteHandler = () => {
     try {
       axios
