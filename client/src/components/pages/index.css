@@ -1,5 +1,6 @@
-.allclients th {
-  padding: 10px 40px;
+.allclients td,
+.allbooks td {
+  padding: 10px 40px !important;
 }
 
 .input_form {

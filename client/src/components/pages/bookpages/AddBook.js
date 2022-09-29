@@ -111,7 +111,7 @@ const AddBook = () => {
 
           <input
             required
-            type="text"
+            type="number"
             id="copies"
             name="copies"
             placeholder="Enter Qty"

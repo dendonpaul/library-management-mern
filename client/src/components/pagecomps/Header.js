@@ -20,6 +20,11 @@ const Header = () => {
             </Link>
           </li>
           <li>
+            <Link to="/allbooks">
+              <button>View Books</button>
+            </Link>
+          </li>
+          <li>
             <Link to="/addbook">
               <button>Add Book</button>
             </Link>
