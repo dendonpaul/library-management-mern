@@ -75,10 +75,23 @@ const get_categories = async (req, res) => {
   }
 };
 
+const get_details = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const bookDetails = await BooksModel.findOne({ _id: id });
+    if (!bookDetails) return res.send("No book Found");
+
+    return res.status(200).json({ message: bookDetails });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 module.exports = {
   add_book,
   edit_book,
   delete_book,
   list_books,
   get_categories,
+  get_details,
 };

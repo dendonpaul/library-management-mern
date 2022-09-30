@@ -1,8 +1,60 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../pagecomps/Header";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const EditBook = () => {
   //useState constants
+  const [values, setValues] = useState({});
+  const [categories, setCategories] = useState([]);
+
+  //get the book id from URL
+  const { id } = useParams();
+
+  //handle input change
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues({ ...values, [name]: value });
+  };
+
+  //Handle submission
+  const handleSubmission = (e) => {
+    e.preventDefault();
+    try {
+      axios
+        .put(`http://localhost:3001/api/users/editbook/${id}`, values)
+        .then((res) => res);
+    } catch (err) {
+      return err;
+    }
+  };
+
+  //fetch single book details on page load
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/api/users/getbookdetails/${id}`)
+      .then((res) => setValues(res.data.message));
+  }, []);
+
+  //Fetch category list from Books Model
+  useEffect(() => {
+    try {
+      axios
+        .get("http://localhost:3001/api/users/getcategories")
+        .then((res) => setCategories(res.data));
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+
+  // map cats and create a loop
+  const displayCats = categories.map((cats, index) => {
+    return (
+      <option key={index} value={cats}>
+        {cats}
+      </option>
+    );
+  });
 
   return (
     <>
@@ -66,7 +118,7 @@ const EditBook = () => {
             onChange={handleChange}
           />
           <button type="submit">Save Book</button>
-          <span id="message_s">{messages}</span>
+          {/* <span id="message_s">{messages}</span> */}
         </form>
       </div>
     </>
