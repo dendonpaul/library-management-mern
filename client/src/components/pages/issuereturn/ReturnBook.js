@@ -29,8 +29,6 @@ const ReturnBook = () => {
   //create loop for issued books
   if (!issued) return null;
   const issuedBooks = issued.map((data) => {
-    console.log(data);
-
     //Date converter
     const convertDate = (data) => {
       const date = new Date(data);
