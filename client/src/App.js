@@ -9,6 +9,8 @@ import EditClient from "./components/pages/clientpages/EditClient";
 import AddBook from "./components/pages/bookpages/AddBook";
 import AllBooks from "./components/pages/bookpages/AllBooks";
 import EditBook from "./components/pages/bookpages/EditBook";
+import IssueBook from "./components/pages/issuereturn/IssueBook";
+import ReturnBook from "./components/pages/issuereturn/ReturnBook";
 
 function App() {
   const user = localStorage.getItem("token");
@@ -21,6 +23,8 @@ function App() {
       {user && <Route path="/addbook" element={<AddBook />} />}
       {user && <Route path="/allbooks" element={<AllBooks />} />}
       {user && <Route path="/editbook/:id" element={<EditBook />} />}
+      {user && <Route path="/issuebook" element={<IssueBook />} />}
+      {user && <Route path="/returnbook" element={<ReturnBook />} />}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/" element={<Navigate to="/login" />} />

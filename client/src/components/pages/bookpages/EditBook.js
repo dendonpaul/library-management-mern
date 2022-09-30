@@ -6,6 +6,7 @@ import axios from "axios";
 const EditBook = () => {
   //useState constants
   const [values, setValues] = useState({});
+  const [messages, setMessages] = useState();
   const [categories, setCategories] = useState([]);
 
   //get the book id from URL
@@ -55,6 +56,41 @@ const EditBook = () => {
       </option>
     );
   });
+
+  //open delete confirmation popup
+  const handleDelete = (e) => {
+    e.preventDefault();
+    // Get the modal
+    let modal = document.getElementById("myModal");
+    // Get the <span> element that closes the modal
+    let span = document.getElementsByClassName("close")[0];
+    // When the user clicks the button, open the modal
+    modal.style.display = "block";
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+      modal.style.display = "none";
+    };
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    };
+  };
+
+  //Delete user after confirmation
+  const deleteHandler = () => {
+    try {
+      axios
+        .delete(`http://localhost:3001/api/users/deletebook/${id}`)
+        .then((res) => {
+          setMessages(res.data[0]);
+          window.location = "/allbooks";
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -118,8 +154,21 @@ const EditBook = () => {
             onChange={handleChange}
           />
           <button type="submit">Save Book</button>
+          <button type="button" onClick={handleDelete}>
+            Delete Book
+          </button>
           {/* <span id="message_s">{messages}</span> */}
         </form>
+      </div>
+      //delete model
+      <div id="myModal" className="modal">
+        <div className="modal-content">
+          <span className="close">&times;</span>
+          <p>Are you sure to delete the Book</p>
+          <button type="button" onClick={deleteHandler}>
+            Delete
+          </button>
+        </div>
       </div>
     </>
   );

@@ -29,6 +29,16 @@ const Header = () => {
               <button>Add Book</button>
             </Link>
           </li>
+          <li>
+            <Link to="/issuebook">
+              <button>Issue Books</button>
+            </Link>
+          </li>
+          <li>
+            <Link to="/returnbook">
+              <button>Return Books</button>
+            </Link>
+          </li>
         </ul>
       </div>
     </div>

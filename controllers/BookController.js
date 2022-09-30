@@ -54,9 +54,24 @@ const delete_book = async (req, res) => {
   }
 };
 
+//list all books
 const list_books = async (req, res) => {
   try {
     const allBooks = await BooksModel.find({});
+
+    if (!allBooks) return res.send("Failed to Find books");
+
+    return res.status(200).json({ data: allBooks });
+  } catch (err) {
+    return res.send(err);
+  }
+};
+
+//list books with min 1 qty
+const list_books_with_qty = async (req, res) => {
+  try {
+    const allBooks = await BooksModel.find({ copies: { $gte: 1 } }).exec();
+    console.log(allBooks);
 
     if (!allBooks) return res.send("Failed to Find books");
 
@@ -94,4 +109,5 @@ module.exports = {
   list_books,
   get_categories,
   get_details,
+  list_books_with_qty,
 };

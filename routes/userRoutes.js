@@ -21,6 +21,7 @@ router.delete("/deletebook/:id", BookController.delete_book);
 router.get("/listbooks", BookController.list_books);
 router.get("/getcategories", BookController.get_categories);
 router.get("/getbookdetails/:id", BookController.get_details);
+router.get("/listbookswithqty", BookController.list_books_with_qty);
 
 //Issue Routes
 router.post("/issuebook/:user/:book", IssueController.issue_book);
