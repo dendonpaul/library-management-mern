@@ -26,7 +26,7 @@ const issue_book = async (req, res) => {
 
 const show_issued_books = async (req, res) => {
   try {
-    const issuedBooks = await IssueModel.find({})
+    const issuedBooks = await IssueModel.find({ returned: false })
       .populate("book")
       .populate("client");
     if (!issuedBooks) return res.send("error");
