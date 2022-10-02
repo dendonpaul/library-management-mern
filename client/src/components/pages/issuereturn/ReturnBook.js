@@ -17,14 +17,15 @@ const ReturnBook = () => {
         return res;
       });
   };
-  if (saved) window.location.reload();
+  // if (saved) window.location.reload();
 
   //fetch the details from issue model during page load
   useEffect(() => {
     axios
       .get("http://localhost:3001/api/users/issuedlist")
       .then((res) => setIssued(res.data));
-  }, []);
+    setSaved(false);
+  }, [saved]);
 
   //create loop for issued books
   if (!issued) return null;
@@ -42,6 +43,7 @@ const ReturnBook = () => {
       const diff = tdata - idata;
       return Math.floor(diff / (24 * 60 * 60 * 1000));
     };
+
     return (
       <tr key={data._id}>
         <td align="center">

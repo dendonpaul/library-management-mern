@@ -31,11 +31,12 @@ const IssueBook = () => {
       .get("http://localhost:3001/api/users/listbookswithqty")
       .then((res) => {
         setBooks(res.data.data);
+        setSaved(false);
       });
   }, [saved]);
 
   //refresh page after saving issue to prevent -ve qty
-  if (saved) window.location = "/issuebook";
+  // if (saved) window.location = "/issuebook";
 
   //function to create options for clients
   if (!clients) return null;
@@ -52,7 +53,6 @@ const IssueBook = () => {
   const bookList = books.map((book) => {
     return <option value={book._id}>{book.name}</option>;
   });
-  console.log(saved);
 
   //Handle Submission
   const submitHandler = (e) => {
