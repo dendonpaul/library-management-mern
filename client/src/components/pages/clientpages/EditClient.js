@@ -26,7 +26,8 @@ const EditClient = () => {
         axios
           .put(`http://localhost:3001/api/users/editclient/${id}`, values)
           .then((response) => {
-            setMessages(response.message);
+            console.log(response);
+            setMessages(response.data.message);
           });
       } catch (err) {
         return console.log(err.response.data);
@@ -42,9 +43,10 @@ const EditClient = () => {
         .get(`http://localhost:3001/api/users/clientdetails/${id}`)
         .then((res) => {
           setValues(res.data[0]);
+          setMessages(res.message);
         });
     } catch (err) {
-      console.log(err);
+      setMessages(err);
     }
   }, []);
 
@@ -149,7 +151,7 @@ const EditClient = () => {
           <span id="message_s">{messages}</span>
         </form>
       </div>
-      //delete model
+      {/* //delete model */}
       <div id="myModal" className="modal">
         <div className="modal-content">
           <span className="close">&times;</span>
